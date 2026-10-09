@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción a Autoridad de Mesa</title>
+    <link rel="stylesheet" href="../css/registro.css">
+</head>
+<body>
+
+    <h1>Inscripción a Autoridad de Mesa</h1>
+    <p>Completá tus datos para postularte como autoridad de mesa.</p>
+
+    <form id="formulario-registro">
+
+        <h2>Datos personales</h2>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni"
+               inputmode="numeric" required>
+
+        <label for="fechaNacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fechaNacimiento"
+               name="fechaNacimiento" required>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <h2>Preguntas sobre el postulante</h2>
+
+        <fieldset>
+            <legend>¿Fuiste autoridad de mesa anteriormente?</legend>
+
+            <label>
+                <input type="radio" name="fueAutoridadMesa"
+                       value="true" required>
+                Sí
+            </label>
+
+            <label>
+                <input type="radio" name="fueAutoridadMesa"
+                       value="false">
+                No
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>¿Realizaste la capacitación?</legend>
+
+            <label>
+                <input type="radio" name="realizoCapacitacion"
+                       value="true" required>
+                Sí
+            </label>
+
+            <label>
+                <input type="radio" name="realizoCapacitacion"
+                       value="false">
+                No
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>¿Estás afiliado a un partido político?</legend>
+
+            <label>
+                <input type="radio" name="estaAfiliado"
+                       value="true" required>
+                Sí
+            </label>
+
+            <label>
+                <input type="radio" name="estaAfiliado"
+                       value="false">
+                No
+            </label>
+        </fieldset>
+
+        <button type="submit">Enviar inscripción</button>
+
+        <a href="index.html">Volver al inicio</a>
+
+    </form>
+
+</body>
+</html>

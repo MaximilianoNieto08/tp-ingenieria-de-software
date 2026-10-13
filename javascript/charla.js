@@ -1,12 +1,9 @@
 const mapa = L.map('map').setView([-34.52293382299685, -58.70052051955064], 13)
 
-//cargamos el fondo del mapa
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(mapa);
-
-
-
 
 
 let charlas = [
@@ -44,7 +41,7 @@ let charlas = [
 
 let marcadores = [];
 function agregarMarcadoresAlMapa() {
-    //agregamos marcadores al mapa
+    
     for (let i = 0; i < charlas.length; i++) {
 
         var marcador = L.marker([
@@ -59,19 +56,40 @@ function agregarMarcadoresAlMapa() {
         ).addTo(mapa);
         marcadores.push(marcador);
         marcador.on("click", function () {
-            tarjetas[i].scrollIntoView();
+            // Buscamos la tarjeta correspondiente a este marcador.
+            let tarjeta = lista.querySelector(".charla[data-indice='" + i + "']");
+
+            if (!tarjeta) {
+                return;
+            }
+
+            // Quitamos el color de las demás tarjetas.
+            let todasLasTarjetas = lista.querySelectorAll(".charla");
+
+            todasLasTarjetas.forEach(function (elemento) {
+                elemento.classList.remove("seleccionada");
+            });
+
+            // Resaltamos la charla seleccionada.
+            tarjeta.classList.add("seleccionada");
+
+            // Desplazamos la lista hasta la tarjeta.
+            tarjeta.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
         });
+        
 
     }
 }
 
-//traemos el div de charlas del html o guardamos el Div
 let lista = document.getElementById("lista-charlas");
 
 function crearTarjetas() {
-    //recorremos la lista de charlas
+    
     for (let i = 0; i < charlas.length; i++) {
-        //escribimos en el div
+        
         lista.innerHTML +=
             "<div class= 'charla' data-indice='" + i + "'>" +
             "<h3>" + charlas[i].nombre + "</h3>" +
@@ -85,9 +103,6 @@ function crearTarjetas() {
 }
 
 
-
-
-//nos guardamos el input del usuario
 let buscador = document.getElementById("buscador");
 
 buscador.addEventListener("input", function () {
@@ -104,11 +119,10 @@ buscador.addEventListener("input", function () {
         return charla.direccion.toLowerCase().includes(texto.toLowerCase()) ||
             charla.nombre.toLowerCase().includes(texto.toLowerCase());
     });
-    //si mi resultado tiene elementos
+    
     if (resultado.length > 0) {
         lista.innerHTML = "";
         for (let i = 0; i < resultado.length; i++) {
-            //creamos nuevas tarjetas
             lista.innerHTML +=
                 lista.innerHTML +=
                 "<div class='charla' data-indice='" + charlas.indexOf(resultado[i]) + "'>" +
@@ -127,42 +141,32 @@ buscador.addEventListener("input", function () {
 });
 
 
-
 crearTarjetas();
 agregarMarcadoresAlMapa();
-
-
-
 
 let tarjetas = document.getElementsByClassName("charla");
 lista.addEventListener("click", function (event) {
     let tarjeta = event.target.closest(".charla");
 
-    // Si el clic no fue dentro de una tarjeta, no hacemos nada.
     if (!tarjeta) {
         return;
     }
 
-    // Obtenemos el índice de la charla seleccionada.
     let indice = tarjeta.getAttribute("data-indice");
 
-    // Buscamos el marcador correspondiente.
     let marcador = marcadores[indice];
 
     if (!marcador) {
         return;
     }
 
-    // Centramos el mapa en la ubicación de la charla.
     let posicion = marcador.getLatLng();
     mapa.setView(posicion, 16);
 
-    // Quitamos la selección anterior.
     for (let i = 0; i < tarjetas.length; i++) {
         tarjetas[i].classList.remove("seleccionada");
     }
 
-    // Destacamos la tarjeta elegida.
     tarjeta.classList.add("seleccionada");
 });
 marcadores[0].on("click", function () {

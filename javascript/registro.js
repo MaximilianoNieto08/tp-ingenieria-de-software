@@ -40,11 +40,11 @@ formulario.addEventListener("submit", function (event) {
 
     resumen += "\n¿Los datos son correctos?";
 
-    // Primera ventana: revisar y confirmar.
+    
     const confirmar = window.confirm(resumen);
 
     if (confirmar) {
-        // Segunda ventana: inscripción confirmada.
+        
         window.alert(
             "¡Inscripcion confirmada!\n\n" +
             "Tu inscripcion fue registrada correctamente."
@@ -52,7 +52,7 @@ formulario.addEventListener("submit", function (event) {
 
         formulario.reset();
     } else {
-        // La persona puede volver al formulario y corregir.
+        
         window.alert(
             "La inscripcion no fue confirmada.\n" +
             "Podes revisar y corregir tus datos."

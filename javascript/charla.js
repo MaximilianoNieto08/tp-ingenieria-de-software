@@ -56,24 +56,21 @@ function agregarMarcadoresAlMapa() {
         ).addTo(mapa);
         marcadores.push(marcador);
         marcador.on("click", function () {
-            // Buscamos la tarjeta correspondiente a este marcador.
+            
             let tarjeta = lista.querySelector(".charla[data-indice='" + i + "']");
 
             if (!tarjeta) {
                 return;
             }
 
-            // Quitamos el color de las demás tarjetas.
             let todasLasTarjetas = lista.querySelectorAll(".charla");
 
             todasLasTarjetas.forEach(function (elemento) {
                 elemento.classList.remove("seleccionada");
             });
 
-            // Resaltamos la charla seleccionada.
             tarjeta.classList.add("seleccionada");
 
-            // Desplazamos la lista hasta la tarjeta.
             tarjeta.scrollIntoView({
                 behavior: "smooth",
                 block: "nearest"
